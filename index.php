@@ -1,30 +1,56 @@
 <?php
-// Код для подключения к базе данных
 
-// Определение количества сообщений на одной странице
-$messagesPerPage = 10;
+require_once('db.php');
 
-// Получение номера текущей страницы
-$current_page = isset($_GET['page']) ? $_GET['page'] : 1;
+$page    = isset($_GET['page']) ? intval($_GET['page']) : 1;
+$perPage = 4;
 
-// Расчет смещения для запроса к базе данных
-$offset = ($current_page - 1) * $messagesPerPage;
+$totalMessages = getTotalMessages();
+$totalPages    = ceil($totalMessages / $perPage);
 
-// SQL-запрос для получения сообщений с учетом постраничного вывода
-$query = "SELECT * FROM messages LIMIT $offset, $messagesPerPage";
-$result = mysqli_query($connection, $query);
-
-// Отображение сообщений
-while ($row = mysqli_fetch_assoc($result)) {
-    // Вывод информации о сообщении
-    echo '<h2>' . $row['title'] . '</h2>';
-    echo '<p>' . $row['short_content'] . '</p>';
-}
-
-// Код для создания ссылок на следующие и предыдущие страницы
-// ...
-
-// Закрытие соединения с базой данных
-mysqli_close($connection);
+$messages = getMessages($page, $perPage);
 ?>
 
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Список сообщений</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+
+<table class="table table-bordered caption-top">
+    <caption>Список сообщений</caption>
+    <thead>
+    <tr class="table-primary">
+        <th>№</th>
+        <th>Заголовок сообщения</th>
+        <th>Краткое содержание</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <?php foreach ($messages as $message): ?>
+        <tr class="table-secondary">
+            <td><?= $message['id']; ?></td>
+            <td><?= $message['title']; ?></td>
+            <td><?= substr($message['body'], 0, 100) . ' ...'; ?></td>
+        </tr>
+    <?php endforeach; ?>
+
+    </tbody>
+</table>
+
+<ul class="pagination justify-content-center">
+    <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+        <li class="page-item"><a class="page-link"
+                                 href="?page=<?= $i; ?>"><?= $i; ?></a></li>
+    <?php endfor; ?>
+</ul>
+
+</body>
+</html>

@@ -1,4 +1,5 @@
 .idea
+.gitignore
 config.php
 load_data.php
 messages.json

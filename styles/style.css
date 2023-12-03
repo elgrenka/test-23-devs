@@ -11,38 +11,23 @@ body {
     font-size: 1.5rem;
 }
 
-h1,
 th,
 caption{
     text-align: center;
     font-weight: bold;
+    color: initial;
+    vertical-align: middle;
 }
 
-.form-control {
-    display: inline-block;
+caption {
+    font-size: 2rem;
 }
 
 .table {
-    counter-reset: counter -1;
-}
-
-.table tr::before {
-    counter-increment: counter;
-}
-
-.table tr:before {
-    content: counter(counter);
-    display: table-cell;
     vertical-align: middle;
-    text-align: center;
-    padding: 0 10px;
-    background-color: var(--bs-table-bg);
 }
 
-.table thead tr::before {
-    content: "№";
-    background-color: var(--bs-table-bg);
-}
+
 
 
 
