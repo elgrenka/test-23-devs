@@ -6,13 +6,13 @@
 }
 
 body {
-    background: #d5ffd5;
+    background: #8ee4af;
     font-family: Ubuntu-Regular, cursive;
     font-size: 1.5rem;
 }
 
 th,
-caption{
+caption {
     text-align: center;
     font-weight: bold;
     color: initial;
@@ -24,7 +24,17 @@ caption {
 }
 
 .table {
-    vertical-align: middle;
+    /*vertical-align: middle;*/
+    width: 90vw;
+}
+
+td a {
+    text-decoration: none;
+    color: inherit;
+}
+
+a:hover {
+    transform: scale(1.2);
 }
 
 

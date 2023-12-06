@@ -21,11 +21,27 @@ function getMessages($page, $perPage) {
 
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
+            $row['comments'] = getComments($row['id']);
             $messages[] = $row;
         }
     }
 
     return $messages;
+}
+
+function getComments($messageId) {
+    global $conn;
+    $sql = "SELECT * FROM `comments` WHERE `messageId` = $messageId";
+    $result = $conn->query($sql);
+    $comments = [];
+
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $comments[] = $row;
+        }
+    }
+
+    return $comments;
 }
 
 function getTotalMessages() {
@@ -35,8 +51,6 @@ function getTotalMessages() {
     $row = $result->fetch_assoc();
     return $row['total'];
 }
-
-//$conn->close();
 
 ?>
 

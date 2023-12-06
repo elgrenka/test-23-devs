@@ -23,13 +23,14 @@ $messages = getMessages($page, $perPage);
 </head>
 <body>
 
-<table class="table table-bordered caption-top">
+<table class="table table-bordered caption-top table-hover mx-auto">
     <caption>Список сообщений</caption>
     <thead>
     <tr class="table-primary">
         <th>№</th>
         <th>Заголовок сообщения</th>
         <th>Краткое содержание</th>
+        <th>Редактировать</th>
     </tr>
     </thead>
     <tbody>
@@ -38,7 +39,15 @@ $messages = getMessages($page, $perPage);
         <tr class="table-secondary">
             <td><?= $message['id']; ?></td>
             <td><?= $message['title']; ?></td>
-            <td><?= substr($message['body'], 0, 100) . ' ...'; ?></td>
+            <td>
+                <a href="view_message.php?id=<?= $message['id']; ?>"
+                   target="_blank">
+                    <?= substr($message['body'], 0, 100) . ' ...'; ?>
+                </a>
+            </td>
+            <td class="text-primary">
+                <a href="edit_message.php?id=<?= $message['id']; ?>">Редактировать</a>
+            </td>
         </tr>
     <?php endforeach; ?>
 
@@ -51,6 +60,25 @@ $messages = getMessages($page, $perPage);
                                  href="?page=<?= $i; ?>"><?= $i; ?></a></li>
     <?php endfor; ?>
 </ul>
+<br>
 
+<h2 class="fw-bold ms-4">Добавить сообщение</h2>
+<form class="m-4 w-50" action="add_message.php" method="POST">
+    <label class="form-label" for="title">Заголовок:</label>
+    <input class="form-control" type="text" id="title" name="title" required><br>
+
+    <label class="form-label" for="author">Автор:</label>
+    <input class="form-control" type="text" id="author" name="author" required><br>
+
+    <label class="form-label" for="full_content">Полное содержание:</label>
+    <textarea class="form-control" id="full_content" name="full_content" rows="8" required></textarea><br>
+
+    <label class="form-label" for="short_content">Краткое содержание:</label>
+    <textarea class="form-control" id="short_content" name="short_content" rows="4" disabled></textarea><br>
+
+    <button class="btn btn-lg btn-primary" type="submit">Добавить сообщение</button>
+</form>
+
+<script src="script.js"></script>
 </body>
 </html>
