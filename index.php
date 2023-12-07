@@ -3,7 +3,7 @@
 require_once('db.php');
 
 $page    = isset($_GET['page']) ? intval($_GET['page']) : 1;
-$perPage = 4;
+$perPage = 5;
 
 $totalMessages = getTotalMessages();
 $totalPages    = ceil($totalMessages / $perPage);
@@ -40,8 +40,7 @@ $messages = getMessages($page, $perPage);
             <td><?= $message['id']; ?></td>
             <td><?= $message['title']; ?></td>
             <td>
-                <a href="view_message.php?id=<?= $message['id']; ?>"
-                   target="_blank">
+                <a href="view_message.php?id=<?= $message['id']; ?>">
                     <?= substr($message['body'], 0, 100) . ' ...'; ?>
                 </a>
             </td>
@@ -56,8 +55,7 @@ $messages = getMessages($page, $perPage);
 
 <ul class="pagination justify-content-center">
     <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-        <li class="page-item"><a class="page-link"
-                                 href="?page=<?= $i; ?>"><?= $i; ?></a></li>
+        <li class="page-item"><a class="page-link" href="?page=<?= $i; ?>"><?= $i; ?></a></li>
     <?php endfor; ?>
 </ul>
 <br>

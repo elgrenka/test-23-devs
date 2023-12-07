@@ -33,7 +33,7 @@ td a {
     color: inherit;
 }
 
-a:hover {
+a.page-link:hover {
     transform: scale(1.2);
 }
 

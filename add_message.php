@@ -5,7 +5,6 @@ require_once('db.php');
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $author = $_POST['author'];
     $title = $_POST['title'];
-//    $shortContent = $_POST['short_content'];
     $fullContent = $_POST['full_content'];
 
     $sql = $conn->prepare("INSERT INTO `messages` (`author`, `title`, `body`) VALUES (?, ?, ?)");
