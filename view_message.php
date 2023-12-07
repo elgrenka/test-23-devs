@@ -53,7 +53,8 @@ $comments = getComments($messageId);
     </tbody>
 </table>
 
-<a class="btn btn-lg btn-primary m-4" href="add_comment.php?id=<?= $messageId; ?>">Добавить комментарий</a>
+<a class="btn btn-lg btn-primary m-4"
+   href="add_comment.php?id=<?= $messageId; ?>">Добавить комментарий</a>
 </body>
 </html>
 
